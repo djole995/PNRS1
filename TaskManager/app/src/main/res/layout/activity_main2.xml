@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_main2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="rtrk.pnrs1.ra11_2014.Main2Activity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:id="@+id/layout1"
+                android:background="@drawable/custom_border2">
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:id="@+id/TaskName"
+                    android:hint="Ime zadatka"
+                    android:background="@drawable/custom_border"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnConfirm1"
+                    android:text="Potvrdi"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout1"
+                android:layout_marginTop="50dp"
+                android:orientation="vertical"
+                android:id="@+id/layout2"
+                android:background="@drawable/custom_border2">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/layout21">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Dan"
+                        android:layout_weight="1"
+                        android:id="@+id/Day"
+                        android:inputType="number"
+                        android:background="@drawable/custom_border"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Mesec"
+                        android:layout_weight="1"
+                        android:id="@+id/Month"
+                        android:inputType="number"
+                        android:background="@drawable/custom_border"/>
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Godina"
+                        android:layout_weight="1"
+                        android:id="@+id/Year"
+                        android:inputType="number"
+                        android:background="@drawable/custom_border"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/layout22">
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Sat"
+                        android:layout_weight="1"
+                        android:id="@+id/Hour"
+                        android:inputType="number"
+                        android:background="@drawable/custom_border"/>
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Minut"
+                        android:layout_weight="1"
+                        android:id="@+id/Minute"
+                        android:inputType="number"
+                        android:background="@drawable/custom_border"/>
+
+                </LinearLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnConfirm2"
+                    android:text="Potvrdi"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_below="@id/layout2"
+                android:layout_marginTop="30dp"
+                android:id="@+id/layout3"
+                android:orientation="vertical"
+                android:background="@drawable/custom_border">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="190dp"
+                    android:hint="Opis zadatka"
+                    android:textAlignment="center"
+                    android:id="@+id/Description"
+                    android:background="@drawable/custom_border2"/>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnConfirm3"
+                    android:text="Potvrdi"
+                    android:textAllCaps="false" />
+            </LinearLayout>
+
+
+            <CheckBox
+                android:text="Podseti me 15 minuta pre isteka"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout3"
+                android:layout_marginTop="20dp"
+                android:id="@+id/checkBox" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/checkBox"
+                android:layout_marginTop="10dp"
+                android:id="@+id/layout4">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnRed"
+                    android:layout_weight="1"
+                    android:background="@color/colorRed"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/btnYellow"
+                    android:layout_weight="1"
+                    android:background="@color/colorYellow"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/btnGreen"
+                    android:background="@color/colorGreen"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/layout4"
+                android:layout_marginTop="10dp"
+                android:id="@+id/layout5">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/btnAdd"
+                    android:text="Dodaj"
+                    android:enabled="false"
+                    android:textAllCaps="false"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/btnCancel"
+                    android:text="Otkaži"
+                    android:textAllCaps="false"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+</ScrollView>
+
