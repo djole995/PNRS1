@@ -11,13 +11,14 @@ public class Main2Activity extends AppCompatActivity {
 
     int attrSetCnt = 0;
     int attrNumber = 4;
-    final Button addTaskBtn = (Button) findViewById(R.id.btnAdd);
+    Button addTaskBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        addTaskBtn = (Button) findViewById(R.id.btnAdd);
         final Button btnPriority1 = (Button) findViewById(R.id.btnRed);
         final Button btnPriority2 = (Button) findViewById(R.id.btnYellow);
         final Button btnPriority3 = (Button) findViewById(R.id.btnGreen);
@@ -78,19 +79,26 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-    public void onClickEditText(EditText editText) {
-       // editText.setEnabled(true);
-        editText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+    public  void onClickEditText(View view) {
+        EditText editText = (EditText) findViewById(view.getId());
+
+        editText.setEnabled(true);
     }
 
-    public void onClickConfirmButton(Button btnConfirm) {
-        EditText attrText = (EditText) findViewById(R.id.TaskName);
-        if(++attrSetCnt == attrNumber) {
-            addTaskBtn.setEnabled(true);
+    public void onClickConfirmButton(View view) {
+        Button btnConfirm = (Button) findViewById(view.getId());
+
+        if(btnConfirm.getText().equals(getString(R.string.confirm))) {
+            if(++attrSetCnt == attrNumber) {
+                addTaskBtn.setEnabled(true);
+            }
+            btnConfirm.setText(R.string.change);
         }
-
-        btnConfirm.setEnabled(false);
-
-        attrText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        else {
+            attrSetCnt--;
+            addTaskBtn.setEnabled(false);
+            btnConfirm.setText(R.string.confirm);
+        }
     }
+
 }

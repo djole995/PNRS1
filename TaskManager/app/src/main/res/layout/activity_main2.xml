@@ -25,7 +25,6 @@
                     android:textAlignment="center"
                     android:id="@+id/TaskName"
                     android:hint="@string/task_name_hint"
-                    android:onClick="onClickEditText"
                     android:background="@drawable/custom_border"/>
 
                 <Button
@@ -96,8 +95,6 @@
                         android:id="@+id/Hour"
                         android:inputType="number"
                         android:background="@drawable/custom_border"/>
-
-                    
 
                     <EditText
                         android:layout_width="wrap_content"
