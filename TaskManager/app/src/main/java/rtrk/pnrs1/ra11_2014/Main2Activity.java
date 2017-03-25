@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import static rtrk.pnrs1.ra11_2014.R.drawable.custom_border;
-
 public class Main2Activity extends AppCompatActivity {
 
     protected int attrSetCnt;
