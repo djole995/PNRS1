@@ -23,14 +23,14 @@
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:id="@+id/TaskName"
-                    android:hint="Ime zadatka"
+                    android:hint="@string/task_name_hint"
                     android:background="@drawable/custom_border"/>
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnConfirm1"
-                    android:text="Potvrdi"
+                    android:text="@string/confirm"
                     android:textAllCaps="false" />
 
             </LinearLayout>
@@ -54,7 +54,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Dan"
+                        android:hint="@string/day_hint"
                         android:layout_weight="1"
                         android:id="@+id/Day"
                         android:inputType="number"
@@ -63,7 +63,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Mesec"
+                        android:hint="@string/month_hint"
                         android:layout_weight="1"
                         android:id="@+id/Month"
                         android:inputType="number"
@@ -72,7 +72,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Godina"
+                        android:hint="@string/year_hint"
                         android:layout_weight="1"
                         android:id="@+id/Year"
                         android:inputType="number"
@@ -88,7 +88,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Sat"
+                        android:hint="@string/hours_hint"
                         android:layout_weight="1"
                         android:id="@+id/Hour"
                         android:inputType="number"
@@ -96,7 +96,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Minut"
+                        android:hint="@string/minutes_hint"
                         android:layout_weight="1"
                         android:id="@+id/Minute"
                         android:inputType="number"
@@ -108,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnConfirm2"
-                    android:text="Potvrdi"
+                    android:text="@string/confirm"
                     android:textAllCaps="false" />
 
             </LinearLayout>
@@ -124,7 +124,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="190dp"
-                    android:hint="Opis zadatka"
+                    android:hint="@string/task_description_hint"
                     android:textAlignment="center"
                     android:id="@+id/Description"
                     android:background="@drawable/custom_border2"/>
@@ -133,13 +133,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/btnConfirm3"
-                    android:text="Potvrdi"
+                    android:text="@string/confirm"
                     android:textAllCaps="false" />
             </LinearLayout>
 
 
             <CheckBox
-                android:text="Podseti me 15 minuta pre isteka"
+                android:text="@string/task_reminder_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout3"
@@ -189,7 +189,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/btnAdd"
-                    android:text="Dodaj"
+                    android:text="@string/confirm"
                     android:enabled="false"
                     android:textAllCaps="false"/>
                 <Button
@@ -197,7 +197,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:id="@+id/btnCancel"
-                    android:text="Otkaži"
+                    android:text="@string/cancel"
                     android:textAllCaps="false"/>
             </LinearLayout>
 

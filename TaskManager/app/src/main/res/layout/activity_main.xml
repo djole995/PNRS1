@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/btnNewTask"
-            android:text="Novi zadatak"
+            android:text="@string/new_task"
             android:textAllCaps="false"/>
 
         <Button
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/btnStat"
-            android:text="Statistika"
+            android:text="@string/statistics"
             android:textAllCaps="false"/>
     </LinearLayout>
 </RelativeLayout>
