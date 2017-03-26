@@ -22,8 +22,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAlignment="center"
-                    android:onClick="onClickEditText"
-                    android:id="@+id/TaskName"
+                    android:id="@+id/taskName"
                     android:hint="@string/task_name_hint"
                     android:background="@drawable/custom_border2"/>
 
@@ -32,7 +31,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btnConfirm1"
                     android:text="@string/confirm"
-                    android:onClick="onClickConfirmButton"
                     android:textAllCaps="false" />
 
             </LinearLayout>
@@ -57,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/day_hint"
                         android:layout_weight="1"
-                        android:id="@+id/Day"
+                        android:id="@+id/day"
                         android:inputType="time"
                         android:background="@drawable/custom_border2"/>
 
@@ -66,7 +64,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/month_hint"
                         android:layout_weight="1"
-                        android:id="@+id/Month"
+                        android:id="@+id/month"
                         android:inputType="number"
                         android:background="@drawable/custom_border2"/>
 
@@ -75,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/year_hint"
                         android:layout_weight="1"
-                        android:id="@+id/Year"
+                        android:id="@+id/year"
                         android:inputType="number"
                         android:background="@drawable/custom_border2"/>
                 </LinearLayout>
@@ -91,7 +89,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/hours_hint"
                         android:layout_weight="1"
-                        android:id="@+id/Hour"
+                        android:id="@+id/hour"
                         android:inputType="number"
                         android:background="@drawable/custom_border2"/>
 
@@ -100,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/minutes_hint"
                         android:layout_weight="1"
-                        android:id="@+id/Minute"
+                        android:id="@+id/minute"
                         android:inputType="number"
                         android:background="@drawable/custom_border2"/>
 
@@ -111,7 +109,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btnConfirm2"
                     android:text="@string/confirm"
-                    android:onClick="onClickConfirmButton"
                     android:textAllCaps="false" />
 
             </LinearLayout>
@@ -123,12 +120,13 @@
                 android:layout_marginTop="30dp"
                 android:id="@+id/layout3"
                 android:orientation="vertical">
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="190dp"
                     android:hint="@string/task_description_hint"
                     android:textAlignment="center"
-                    android:id="@+id/Description"
+                    android:id="@+id/description"
                     android:background="@drawable/custom_border2"/>
 
                 <Button
@@ -136,7 +134,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/btnConfirm3"
                     android:text="@string/confirm"
-                    android:onClick="onClickConfirmButton"
                     android:textAllCaps="false" />
             </LinearLayout>
 
