@@ -20,7 +20,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Task Name"
+                    android:text="@string/task_name"
                     android:textAlignment="center"
                     android:background="@color/colorAccent"
                     android:textSize="20dp"
@@ -30,6 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textAlignment="center"
                     android:id="@+id/taskName"
                     android:background="@drawable/custom_border2"/>
 
@@ -53,7 +54,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Date and time"
+                    android:text="@string/task_time"
                     android:textAlignment="center"
                     android:background="@color/colorAccent"
                     android:textSize="20dp"
@@ -140,7 +141,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Desription"
+                    android:text="@string/task_description"
                     android:layout_weight="1"
                     android:textAlignment="center"
                     android:background="@color/colorAccent"

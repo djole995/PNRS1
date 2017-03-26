@@ -6,9 +6,9 @@
     <string name="new_task">New task</string>
     <string name="statistics">Statistics</string>
     <string name="cancel">Cancel</string>
-    <string name="task_name_hint">Task name</string>
-    <string name="task_time_hint">Task time</string>
-    <string name="task_description_hint">Task description</string>
+    <string name="task_name">Task name</string>
+    <string name="task_time">Date and Time</string>
+    <string name="task_description">Description</string>
     <string name="task_reminder_checkbox">Remind me 15 minutes before task elapses</string>
     <string name="day_hint">Day</string>
     <string name="month_hint">Month</string>
