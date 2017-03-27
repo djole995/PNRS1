@@ -13,7 +13,7 @@
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:id="@+id/layout1">
 
@@ -29,7 +29,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:lines="1"
                     android:textAlignment="center"
                     android:id="@+id/taskName"
                     android:background="@drawable/custom_border2"/>
@@ -68,16 +68,16 @@
                     android:id="@+id/layout21">
 
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/day_hint"
                         android:layout_weight="1"
                         android:id="@+id/day"
-                        android:inputType="time"
+                        android:inputType="number"
                         android:background="@drawable/custom_border2"/>
 
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/month_hint"
                         android:layout_weight="1"
@@ -86,7 +86,7 @@
                         android:background="@drawable/custom_border2"/>
 
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/year_hint"
                         android:layout_weight="1"
@@ -102,7 +102,7 @@
                     android:layout_weight="1"
                     android:id="@+id/layout22">
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/hours_hint"
                         android:layout_weight="1"
@@ -111,7 +111,7 @@
                         android:background="@drawable/custom_border2"/>
 
                     <EditText
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:hint="@string/minutes_hint"
                         android:layout_weight="1"
@@ -154,7 +154,7 @@
                     android:layout_height="200dp"
                     android:scrollbars="vertical"
                     android:scrollbarAlwaysDrawVerticalTrack="true"
-                    android:scrollbarThumbVertical="@color/colorPrimary"
+                    android:scrollbarThumbVertical="@color/colorAccent"
                     android:scrollbarStyle="outsideInset"
                     android:layout_weight="1"
                     android:id="@+id/description"
@@ -171,14 +171,16 @@
                     android:textAllCaps="false" />
             </LinearLayout>
 
-
             <CheckBox
                 android:text="@string/task_reminder_checkbox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/layout3"
-                android:layout_marginTop="20dp"
-                android:id="@+id/checkBox" />
+                android:layout_marginTop="50dp"
+                android:id="@+id/checkBox"
+                android:layout_below="@+id/layout3"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
