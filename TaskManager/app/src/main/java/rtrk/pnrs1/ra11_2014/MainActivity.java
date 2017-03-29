@@ -13,22 +13,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button newTaskBtn = (Button) findViewById(R.id.btnNewTask);
-        Button statBtn = (Button) findViewById(R.id.btnStat);
-        final Intent in1 = new Intent(MainActivity.this, Main2Activity.class);
-        final Intent in2 = new Intent(MainActivity.this, Main3Activity.class);
+        Button btnNewTask = (Button) findViewById(R.id.btnNewTask);
+        Button btnStat = (Button) findViewById(R.id.btnStat);
+        final Intent inNewTask = new Intent(MainActivity.this, Main2Activity.class);
+        final Intent inStat = new Intent(MainActivity.this, Main3Activity.class);
 
-        newTaskBtn.setOnClickListener(new View.OnClickListener() {
+        btnNewTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(in1);
+                startActivity(inNewTask);
             }
         });
 
-        statBtn.setOnClickListener(new View.OnClickListener() {
+        btnStat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(in2);
+                startActivity(inStat);
             }
         });
     }

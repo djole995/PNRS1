@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.Layout;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -154,6 +156,10 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if(btnConfirmTaskName.getText().equals(getString(R.string.confirm))) {
                     if(txtTaskName.getText().toString().isEmpty()) {
+                        Toast badInputNotify = Toast.makeText(getApplicationContext(),
+                                R.string.bad_task_name_input, Toast.LENGTH_SHORT);
+                        badInputNotify.setGravity(Gravity.BOTTOM, 0, 20);
+                        badInputNotify.show();
                         return;
                     }
                     if(++attrSetCnt == attrNumber) {
@@ -176,6 +182,10 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if(btnConfirmTaskTime.getText().equals(getString(R.string.confirm))) {
                     if(!checkDateAndTime()) {
+                        Toast badInputNotify = Toast.makeText(getApplicationContext(),
+                                R.string.bad_task_time_input, Toast.LENGTH_SHORT);
+                        badInputNotify.setGravity(Gravity.BOTTOM, 0, 20);
+                        badInputNotify.show();
                         return;
                     }
 
@@ -210,6 +220,10 @@ public class Main2Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if(btnConfirmTaskDesc.getText().equals(getString(R.string.confirm))) {
                     if(txtTaskDescription.getText().toString().isEmpty()) {
+                        Toast badInputNotify = Toast.makeText(getApplicationContext(),
+                                R.string.bad_task_desc_input, Toast.LENGTH_SHORT);
+                        badInputNotify.setGravity(Gravity.BOTTOM, 0, 20);
+                        badInputNotify.show();
                         return;
                     }
 
