@@ -19,5 +19,6 @@
     <string name="bad_task_name_input">Task name not specified!</string>
     <string name="bad_task_time_input">Task date and/or time not valid!</string>
     <string name="bad_task_desc_input">Task description not specified!</string>
+    <string name="item_task_priority">P</string>
 
 </resources>
