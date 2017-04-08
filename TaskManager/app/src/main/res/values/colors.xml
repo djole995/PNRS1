@@ -10,4 +10,5 @@
     <color name="colorYellow">#FFFF00</color>
     <color name="colorYellowPale">#2FFFFF00</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
 </resources>
