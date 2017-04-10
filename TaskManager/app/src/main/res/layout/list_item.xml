@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:gravity="left|center"
             android:textAlignment="gravity"
             android:textColor="@color/colorBlack"
@@ -40,13 +40,13 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="7"
             android:orientation="vertical"
             android:gravity="right"
             android:id="@+id/itemLayout1">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:orientation="horizontal"
                 android:id="@+id/itemLayout2">
@@ -62,7 +62,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="Danas"
+                    android:text="28/11/2017"
                     android:textColor="@color/colorBlack"
                     android:gravity="center"
                     android:textSize="20dp"
@@ -73,6 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
+                android:text="Reminder enabled"
                 android:id="@+id/item_task_finished"/>
         </LinearLayout>
 

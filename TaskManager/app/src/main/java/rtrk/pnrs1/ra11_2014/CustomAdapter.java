@@ -32,6 +32,11 @@ public class CustomAdapter extends ArrayAdapter<ListItem> {
 
     }
 
+    @Override
+    public void add(ListItem object) {
+        super.add(object);
+    }
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

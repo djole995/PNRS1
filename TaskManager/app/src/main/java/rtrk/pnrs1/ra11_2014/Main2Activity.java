@@ -12,7 +12,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -40,6 +43,7 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
 
         btnAddTask = (Button) findViewById(R.id.btnAdd);
         prioritySelected = false;
@@ -140,6 +144,15 @@ public class Main2Activity extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ListView taskList = MainActivity.getListView();
+                String date = txtDay.toString()+"/"+txtMonth.toString()+"/"+txtYear.toString();
+                /*String pattern = "dd/MM/yyyy";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);*/
+
+                CustomAdapter customAdapter = MainActivity.getCustomAdapter();
+
+                customAdapter.add(new ListItem("P", "aaa", date, true, false));
+                taskList.setAdapter(customAdapter);
                 startActivity(in);
             }
         });
