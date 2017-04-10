@@ -15,16 +15,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 
-        <TextView
+        <View
             android:id="@+id/item_task_priority"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/item_task_priority"
             android:textSize="30dp"
             android:gravity="center"
-            android:textAlignment="gravity"
-            android:background="@color/colorRed"/>
+            android:textAlignment="gravity" />
 
         <TextView
             android:id="@+id/item_task_name"

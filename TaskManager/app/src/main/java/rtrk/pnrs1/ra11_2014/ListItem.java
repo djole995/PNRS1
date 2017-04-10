@@ -1,6 +1,7 @@
 package rtrk.pnrs1.ra11_2014;
 
 import android.app.LauncherActivity;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.RadioButton;

@@ -144,16 +144,30 @@ public class Main2Activity extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ListView taskList = MainActivity.getListView();
+                //ListView taskList = MainActivity.getListView();
                 String date = txtDay.toString()+"/"+txtMonth.toString()+"/"+txtYear.toString();
+                String priority;
+
+                if(btnPriority1.isPressed()) {
+                    priority = "HIGH";
+                }
+                else if(btnPriority2.isPressed()) {
+                    priority = "MEDIUM";
+                }
+                else {
+                    priority = "LOW";
+                }
                 /*String pattern = "dd/MM/yyyy";
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);*/
 
                 CustomAdapter customAdapter = MainActivity.getCustomAdapter();
 
-                customAdapter.add(new ListItem("P", "aaa", date, true, false));
-                taskList.setAdapter(customAdapter);
-                startActivity(in);
+                customAdapter.addTask(new ListItem(priority, "aaa", date, true, false));
+
+                Intent intent = getIntent();
+                intent.putExtra("key", 1);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 
