@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.Layout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,12 @@ import java.text.SimpleDateFormat;
 public class Main2Activity extends AppCompatActivity {
 
     protected int attrSetCnt;
-    protected int attrNumber;
+    protected int attrNumber = 4;
+    protected int day;
+    protected int month;
+    protected int year;
+    protected int hours;
+    protected int minutes;
     protected boolean prioritySelected;
     protected Button btnAddTask;
     protected Button btnPriority1;
@@ -48,18 +54,9 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        listItem = (ListItem) getIntent().getSerializableExtra("key");
-
-        listItem.setTaskFinished(true);
-
-        if(getIntent().getSerializableExtra("key") != null) {
-            Toast.makeText(getApplicationContext(), "AAAAAAA", Toast.LENGTH_LONG);
-        }
-
         btnAddTask = (Button) findViewById(R.id.btnAdd);
         prioritySelected = false;
         attrSetCnt = 0;
-        attrNumber = 4;
         btnConfirmTaskName = (Button) findViewById((R.id.btnConfirm1));
         btnConfirmTaskTime = (Button) findViewById((R.id.btnConfirm2));
         btnConfirmTaskDesc = (Button) findViewById((R.id.btnConfirm3));
@@ -76,6 +73,8 @@ public class Main2Activity extends AppCompatActivity {
         txtMinutes = (EditText) findViewById(R.id.minute);
         chBoxReminder = (CheckBox) findViewById(R.id.checkBoxReminder);
         in = new Intent(Main2Activity.this, MainActivity.class);
+
+
 
         btnPriority1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,9 +155,10 @@ public class Main2Activity extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String date = txtDay.getText().toString()+"/"+txtMonth.getText().toString()+
-                        "/"+txtYear.getText().toString();
+                /*String date = txtDay.getText().toString()+"/"+txtMonth.getText().toString()+
+                        "/"+txtYear.getText().toString();*/
                 ListItem.TaskPriority priority;
+                int date[] = {day, month, year, hours, minutes};
 
                 if(btnPriority1.isEnabled()) {
                     priority = ListItem.TaskPriority.HIGH;
@@ -170,9 +170,11 @@ public class Main2Activity extends AppCompatActivity {
                     priority = ListItem.TaskPriority.LOW;
                 }
 
+
+
                 Intent intent = getIntent();
                 intent.putExtra(getString(R.string.key_add_task), new ListItem(priority, txtTaskName.getText().toString(),
-                        date, chBoxReminder.isChecked(), false));
+                       txtTaskDescription.getText().toString(), date, chBoxReminder.isChecked(), false));
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -277,9 +279,44 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        if(getIntent().getSerializableExtra(getString(R.string.key_modify_task)) != null) {
+            listItem = (ListItem) getIntent().getSerializableExtra(getString(R.string.key_modify_task));
+
+            txtTaskName.setText(listItem.getTaskName());
+            btnConfirmTaskName.callOnClick();
+
+            ListItem.TaskPriority taskPriority = listItem.getTaskPriority();
+            if(taskPriority == ListItem.TaskPriority.HIGH) {
+                btnPriority1.callOnClick();
+            }
+            else if(taskPriority == ListItem.TaskPriority.MEDIUM) {
+                btnPriority2.callOnClick();
+            }
+            else {
+                btnPriority3.callOnClick();
+            }
+
+            txtTaskDescription.setText(listItem.getTaskDescription());
+            btnConfirmTaskDesc.callOnClick();
+
+
+            int date[] = listItem.getTaskDate();
+
+            txtDay.setText(Integer.toString(date[0]));
+            txtMonth.setText(Integer.toString(date[1]));
+            txtYear.setText(Integer.toString(date[2]));
+            txtHours.setText(Integer.toString(date[3]));
+            txtMinutes.setText(Integer.toString(date[4]));
+            btnConfirmTaskTime.callOnClick();
+
+            chBoxReminder.setChecked(listItem.getTaskReminder());
+
+            btnAddTask.setText(R.string.confirm);
+        }
+
     }
 
-    @Override
+/*    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
             super.onActivityResult(requestCode, resultCode, data);
@@ -299,7 +336,7 @@ public class Main2Activity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
 
-    }
+    }*/
 
     protected boolean checkDateAndTime() {
         String s1 = txtDay.getText().toString();
@@ -312,11 +349,11 @@ public class Main2Activity extends AppCompatActivity {
             return false;
         }
 
-        int day = Integer.parseInt(s1);
-        int month = Integer.parseInt(s2);
-        int year = Integer.parseInt(s3);
-        int hours = Integer.parseInt(s4);
-        int minutes = Integer.parseInt(s5);
+        day = Integer.parseInt(s1);
+        month = Integer.parseInt(s2);
+        year = Integer.parseInt(s3);
+        hours = Integer.parseInt(s4);
+        minutes = Integer.parseInt(s5);
 
         /* Checking day and month */
         if(day <= 0 || month <= 0) {

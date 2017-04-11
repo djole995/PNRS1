@@ -19,17 +19,19 @@ public class ListItem implements Serializable {
     public enum TaskPriority {LOW, MEDIUM, HIGH};
     protected TaskPriority taskPriority;
     protected String taskName;
-    protected String taskDate;
+    protected int[] taskDate;
+    protected  String taskDescription;
     protected boolean taskFinished;
     protected boolean taskReminder;
 
 
-    public ListItem(TaskPriority taskPriority, String taskName, String taskDate, boolean taskReminder, boolean taskFinished) {
+    public ListItem(TaskPriority taskPriority, String taskName, String taskDescription, int[] taskDate, boolean taskReminder, boolean taskFinished) {
         this.taskPriority = taskPriority;
         this.taskName = taskName;
         this.taskDate = taskDate;
         this.taskReminder = taskReminder;
         this.taskFinished = taskFinished;
+        this.taskDescription = taskDescription;
     }
 
 
@@ -49,11 +51,11 @@ public class ListItem implements Serializable {
         this.taskName = taskName;
     }
 
-    public String getTaskDate() {
+    public int[] getTaskDate() {
         return taskDate;
     }
 
-    public void setTaskDate(String taskDate) {
+    public void setTaskDate(int[] taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -72,4 +74,22 @@ public class ListItem implements Serializable {
     public void setTaskFinished(boolean taskFinished) {
         this.taskFinished = taskFinished;
     }
+
+    public String getTaskDescription() {
+        return taskDescription;
+    }
+
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
+    }
+
+   /* public int[] getTaskDateAsArray() {
+        String[] day = new String[3];
+        int[] ret = new int[3];
+        day = taskDate.split("/");
+
+        for(int i = 0; i < 3; i++) {
+
+        }
+    }*/
 }

@@ -43,10 +43,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        int date[] = {1, 2, 2018, 22, 30};
+
         listView = (ListView) findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this.getApplicationContext());
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "21/3/2017", true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "21/3/2017", true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
 
         listView.setAdapter(customAdapter);
 
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-               inNewTask.putExtra("key", parent.getItemIdAtPosition(position));
+               inNewTask.putExtra(getString(R.string.key_modify_task), (ListItem) parent.getItemAtPosition(position));
 
                 startActivityForResult(inNewTask , REQUEST_CODE_MODIFY);
                 return true;
@@ -96,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, ex.toString(),
                     Toast.LENGTH_SHORT).show();
         }
-
     }
 
 }

@@ -96,7 +96,11 @@ public class CustomAdapter extends BaseAdapter {
             viewHolder.taskPriority.setBackgroundColor(Color.GREEN);
         }
 
-        viewHolder.taskDate.setText(listItem.getTaskDate());
+        int date[] = listItem.getTaskDate();
+        String strDate = Integer.toString(date[0])+"/"+Integer.toString(date[1])+"/"+Integer.toString(date[2])
+                +"\n"+Integer.toString(date[3])+":"+Integer.toString(date[4]);
+
+        viewHolder.taskDate.setText(strDate);
         viewHolder.taskReminder.setChecked(listItem.getTaskReminder());
         viewHolder.taskFinished.setChecked(listItem.getTaskFinished());
 
