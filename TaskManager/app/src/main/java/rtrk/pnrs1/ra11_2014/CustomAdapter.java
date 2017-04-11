@@ -63,7 +63,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ListItem listItem = (ListItem) getItem(position);
-        ViewHolder viewHolder = new ViewHolder();
+        ViewHolder viewHolder;
 
 
         if (convertView == null) {
@@ -73,7 +73,7 @@ public class CustomAdapter extends BaseAdapter {
                     Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item, parent, false);
             viewHolder.taskName = (TextView) convertView.findViewById(R.id.item_task_name);
-            viewHolder.taskPriority = (View) convertView.findViewById(R.id.item_task_priority);
+            viewHolder.taskPriority = convertView.findViewById(R.id.item_task_priority);
             viewHolder.taskDate = (TextView) convertView.findViewById(R.id.item_task_date);
             viewHolder.taskFinished = (CheckBox) convertView.findViewById(R.id.item_task_finished);
             viewHolder.taskReminder = (RadioButton) convertView.findViewById(R.id.item_task_reminder);
@@ -84,21 +84,21 @@ public class CustomAdapter extends BaseAdapter {
         }
 
 
-            viewHolder.taskName.setText(listItem.getTaskName());
-            String priority = listItem.getTaskName();
-            if(priority == "HIGH") {
-                viewHolder.taskPriority.setBackgroundColor(Color.RED);
-            }
-            else if(priority == "MEDIUM") {
-                viewHolder.taskPriority.setBackgroundColor(Color.YELLOW);
-            }
-            else {
-                viewHolder.taskPriority.setBackgroundColor(Color.GREEN);
-            }
+        viewHolder.taskName.setText(listItem.getTaskName());
+        ListItem.TaskPriority priority = listItem.getTaskPriority();
+        if(priority == ListItem.TaskPriority.HIGH) {
+            viewHolder.taskPriority.setBackgroundColor(Color.RED);
+        }
+        else if(priority == ListItem.TaskPriority.MEDIUM) {
+            viewHolder.taskPriority.setBackgroundColor(Color.YELLOW);
+        }
+        else {
+            viewHolder.taskPriority.setBackgroundColor(Color.GREEN);
+        }
 
         viewHolder.taskDate.setText(listItem.getTaskDate());
-            viewHolder.taskReminder.setChecked(listItem.getTaskFinished());
-            viewHolder.taskFinished.setChecked(listItem.getTaskReminder());
+        viewHolder.taskReminder.setChecked(listItem.getTaskReminder());
+        viewHolder.taskFinished.setChecked(listItem.getTaskFinished());
 
 
         return convertView;

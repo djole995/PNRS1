@@ -11,6 +11,7 @@ import android.text.Layout;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -37,13 +38,23 @@ public class Main2Activity extends AppCompatActivity {
     protected EditText txtYear;
     protected EditText txtHours;
     protected EditText txtMinutes;
+    protected CheckBox chBoxReminder;
     protected Intent in;
+    ListItem listItem;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        listItem = (ListItem) getIntent().getSerializableExtra("key");
+
+        listItem.setTaskFinished(true);
+
+        if(getIntent().getSerializableExtra("key") != null) {
+            Toast.makeText(getApplicationContext(), "AAAAAAA", Toast.LENGTH_LONG);
+        }
 
         btnAddTask = (Button) findViewById(R.id.btnAdd);
         prioritySelected = false;
@@ -63,6 +74,7 @@ public class Main2Activity extends AppCompatActivity {
         txtYear = (EditText) findViewById(R.id.year);
         txtHours = (EditText) findViewById(R.id.hour);
         txtMinutes = (EditText) findViewById(R.id.minute);
+        chBoxReminder = (CheckBox) findViewById(R.id.checkBoxReminder);
         in = new Intent(Main2Activity.this, MainActivity.class);
 
         btnPriority1.setOnClickListener(new View.OnClickListener() {
@@ -144,28 +156,23 @@ public class Main2Activity extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ListView taskList = MainActivity.getListView();
-                String date = txtDay.toString()+"/"+txtMonth.toString()+"/"+txtYear.toString();
-                String priority;
+                String date = txtDay.getText().toString()+"/"+txtMonth.getText().toString()+
+                        "/"+txtYear.getText().toString();
+                ListItem.TaskPriority priority;
 
-                if(btnPriority1.isPressed()) {
-                    priority = "HIGH";
+                if(btnPriority1.isEnabled()) {
+                    priority = ListItem.TaskPriority.HIGH;
                 }
-                else if(btnPriority2.isPressed()) {
-                    priority = "MEDIUM";
+                else if(btnPriority2.isEnabled()) {
+                    priority = ListItem.TaskPriority.MEDIUM;
                 }
                 else {
-                    priority = "LOW";
+                    priority = ListItem.TaskPriority.LOW;
                 }
-                /*String pattern = "dd/MM/yyyy";
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);*/
-
-                CustomAdapter customAdapter = MainActivity.getCustomAdapter();
-
-                customAdapter.addTask(new ListItem(priority, "aaa", date, true, false));
 
                 Intent intent = getIntent();
-                intent.putExtra("key", 1);
+                intent.putExtra(getString(R.string.key_add_task), new ListItem(priority, txtTaskName.getText().toString(),
+                        date, chBoxReminder.isChecked(), false));
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -269,6 +276,28 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        try {
+            super.onActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == MainActivity.REQUEST_CODE_MODIFY  && resultCode  == RESULT_OK) {
+                ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_add_task));
+
+                attrSetCnt = 4;
+
+                txtTaskName.setText(listItem.getTaskName());
+                txtTaskName.setEnabled(false);
+                btnConfirmTaskName.setText(R.string.modify);
+
+            }
+        } catch (Exception ex) {
+            Toast.makeText(Main2Activity.this, ex.toString(),
+                    Toast.LENGTH_SHORT).show();
+        }
 
     }
 

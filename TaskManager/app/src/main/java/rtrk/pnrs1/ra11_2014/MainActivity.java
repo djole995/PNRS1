@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,22 +31,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1;
+    public static final int REQUEST_CODE_MODIFY = 2;
     protected static CustomAdapter customAdapter;
     protected ArrayList<ListItem> taskList;
     protected static ListView listView;
-
-    String pattern;
-    SimpleDateFormat simpleDateFormat;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
-
-    public static CustomAdapter getCustomAdapter() {
-        return customAdapter;
-    }
-
 
 
 
@@ -53,26 +43,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        pattern = "dd/MM/yyyy";
-        simpleDateFormat = new SimpleDateFormat(pattern);
-
         listView = (ListView) findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this.getApplicationContext());
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "21/3/2017", true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "21/3/2017", true, false));
 
         listView.setAdapter(customAdapter);
-
-       /* try {
-            customAdapter.addTask(new ListItem("HIGH", "bbbb", simpleDateFormat.format(simpleDateFormat.parse("28/11/1995")), true, true));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
-
-
 
         Button btnNewTask = (Button) findViewById(R.id.btnNewTask);
         Button btnStat = (Button) findViewById(R.id.btnStat);
         final Intent inNewTask = new Intent(MainActivity.this, Main2Activity.class);
         final Intent inStat = new Intent(MainActivity.this, Main3Activity.class);
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+               inNewTask.putExtra("key", parent.getItemIdAtPosition(position));
+
+                startActivityForResult(inNewTask , REQUEST_CODE_MODIFY);
+                return true;
+            }
+        });
 
         btnNewTask.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,13 +79,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         try {
             super.onActivityResult(requestCode, resultCode, data);
 
             if (requestCode == REQUEST_CODE  && resultCode  == RESULT_OK) {
-                customAdapter.notifyDataSetChanged();
+                ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_add_task));
+                customAdapter.addTask(listItem);
+            }
+            else if(requestCode == REQUEST_CODE_MODIFY  && resultCode  == RESULT_OK) {
+
             }
         } catch (Exception ex) {
             Toast.makeText(MainActivity.this, ex.toString(),
@@ -104,11 +99,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
-
-
-    public static ListView getListView() {
-        return listView;
-    }
 }

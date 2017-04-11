@@ -7,22 +7,24 @@ import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Milan on 7.4.2017.
  */
 
-public class ListItem {
+public class ListItem implements Serializable {
 
-    protected String taskPriority;
+    public enum TaskPriority {LOW, MEDIUM, HIGH};
+    protected TaskPriority taskPriority;
     protected String taskName;
     protected String taskDate;
     protected boolean taskFinished;
     protected boolean taskReminder;
 
 
-    public ListItem(String taskPriority, String taskName, String taskDate, boolean taskReminder, boolean taskFinished) {
+    public ListItem(TaskPriority taskPriority, String taskName, String taskDate, boolean taskReminder, boolean taskFinished) {
         this.taskPriority = taskPriority;
         this.taskName = taskName;
         this.taskDate = taskDate;
@@ -31,11 +33,11 @@ public class ListItem {
     }
 
 
-    public String getTaskPriority() {
+    public TaskPriority getTaskPriority() {
         return taskPriority;
     }
 
-    public void setTaskPriority(String taskPriority) {
+    public void setTaskPriority(TaskPriority taskPriority) {
         this.taskPriority = taskPriority;
     }
 
