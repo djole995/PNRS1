@@ -3,6 +3,7 @@ package rtrk.pnrs1.ra11_2014;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Milan on 8.4.2017.
@@ -103,12 +106,16 @@ public class CustomAdapter extends BaseAdapter {
 
         int date[] = listItem.getTaskDate();
 
-        String hours;
+/*        String hours;
         String minutes;
         String day = Integer.toString(date[0]);
         String month = Integer.toString(date[1]);
         String year = Integer.toString(date[2]);
 
+        Calendar current = Calendar.getInstance();
+        Calendar taskCurrent = Calendar.getInstance();
+
+        setDate(
 
         if(date[3] > 9) {
             hours = Integer.toString(date[3]);
@@ -128,7 +135,8 @@ public class CustomAdapter extends BaseAdapter {
 
 
         String strDate = Integer.toString(date[0])+"/"+Integer.toString(date[1])+"/"+Integer.toString(date[2])
-                +"\n"+/*Integer.toString(date[3])*/hours+":"+/*Integer.toString(date[4])*/minutes;
+                +"\n"+/*Integer.toString(date[3])hours+":"+/*Integer.toString(date[4])minutes*/;
+        String strDate = getFormatedDate(date);
 
         viewHolder.taskDate.setText(strDate);
         viewHolder.taskReminder.setChecked(listItem.getTaskReminder());
@@ -136,6 +144,72 @@ public class CustomAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    String getFormatedDate(int date[]) {
+        String hours;
+        String minutes;
+        String day = Integer.toString(date[0]);
+        String month = Integer.toString(date[1]);
+        String year = Integer.toString(date[2]);
+
+       // int daysInMonths[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        String daysOfWeek[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
+                "Saturday"};
+
+        String dateStr;
+
+        Calendar currentDate = Calendar.getInstance();
+        Calendar taskDate = Calendar.getInstance();
+
+        taskDate.set(date[2], date[1]-1, date[0]);
+
+        if(taskDate.get(Calendar.YEAR) == currentDate.get(Calendar.YEAR)) {
+            int difference = taskDate.get(Calendar.DAY_OF_YEAR) - currentDate.get(Calendar.DAY_OF_YEAR);
+            if (difference < 7) {
+                if (difference == 0) {
+                    dateStr = "Today";
+                }
+                else if (difference == 1) {
+                    dateStr = "Tomorrow";
+                }
+                else {
+                    int dayofWeek = taskDate.get(Calendar.DAY_OF_WEEK);
+                    taskDate.get(Calendar.DAY_OF_WEEK);
+                    dateStr = daysOfWeek[dayofWeek-1];
+                }
+            }
+            else {
+                dateStr = Integer.toString(date[0]) + "/" + Integer.toString(date[1]) +
+                        "/" + Integer.toString(date[2]);
+            }
+        }
+        else {
+            dateStr = Integer.toString(date[0]) + "/" + Integer.toString(date[1]) +
+                    "/" + Integer.toString(date[2]);
+        }
+
+
+        if(date[3] > 9) {
+            hours = Integer.toString(date[3]);
+        }
+        else {
+            hours = "0"+Integer.toString(date[3]);
+        }
+
+        if(date[4] > 9) {
+            minutes = Integer.toString(date[4]);
+        }
+        else {
+            minutes = "0"+Integer.toString(date[4]);
+        }
+
+
+
+
+        String ret = dateStr +"\n"+hours+":"+minutes;
+
+        return ret;
     }
 
 

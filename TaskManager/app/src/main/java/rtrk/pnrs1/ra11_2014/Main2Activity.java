@@ -169,7 +169,6 @@ public class Main2Activity extends AppCompatActivity {
                 }
 
 
-
                 Intent intent = getIntent();
 
                 if(intent.getSerializableExtra(getString(R.string.key_modify_task)) != null) {

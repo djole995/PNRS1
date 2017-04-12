@@ -22,5 +22,6 @@
     <string name="key_add_task">Add New Task</string>
     <string name="key_modify_task">Modify Task</string>
     <string name="task_finished_check_box">Task finished</string>
+    <string name="tomorrow">Tomorrow</string>
 
 </resources>
