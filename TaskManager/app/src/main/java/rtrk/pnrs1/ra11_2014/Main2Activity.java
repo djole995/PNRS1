@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -172,7 +173,6 @@ public class Main2Activity extends AppCompatActivity {
                 Intent intent = getIntent();
 
                 if(intent.getSerializableExtra(getString(R.string.key_modify_task)) != null) {
-                    ListItem listItem = (ListItem) intent.getSerializableExtra(getString(R.string.key_modify_task));
 
                     intent.putExtra(getString(R.string.key_modify_task), new ListItem(priority, txtTaskName.getText().toString(),
                             txtTaskDescription.getText().toString(), date, chBoxReminder.isChecked(), false));
@@ -324,28 +324,6 @@ public class Main2Activity extends AppCompatActivity {
 
     }
 
-/*    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        try {
-            super.onActivityResult(requestCode, resultCode, data);
-
-            if (requestCode == MainActivity.REQUEST_CODE_MODIFY  && resultCode  == RESULT_OK) {
-                ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_add_task));
-
-                attrSetCnt = 4;
-
-                txtTaskName.setText(listItem.getTaskName());
-                txtTaskName.setEnabled(false);
-                btnConfirmTaskName.setText(R.string.modify);
-
-            }
-        } catch (Exception ex) {
-            Toast.makeText(Main2Activity.this, ex.toString(),
-                    Toast.LENGTH_SHORT).show();
-        }
-
-    }*/
-
     protected boolean checkDateAndTime() {
         String s1 = txtDay.getText().toString();
         String s2 = txtMonth.getText().toString();
@@ -393,18 +371,32 @@ public class Main2Activity extends AppCompatActivity {
         if(year < 2017) {
             return false;
         }
-        else if(year == 2017) {
-            if(month < 3) {
-                return false;
-            }
-            else if(month == 3 && day < 30) {
-                return false;
-            }
-        }
 
         /* Checking time */
         if(hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
             return false;
+        }
+
+        Calendar currentDate = Calendar.getInstance();
+        Calendar taskDate = Calendar.getInstance();
+
+        taskDate.set(year, month-1, day, hours, minutes);
+
+        if(taskDate.get(Calendar.YEAR) == currentDate.get(Calendar.YEAR)) {
+            int difference = taskDate.get(Calendar.DAY_OF_YEAR) - currentDate.get(Calendar.DAY_OF_YEAR);
+            if (difference < 0) {
+                return false;
+            }
+            else if(difference == 0) {
+                if(taskDate.get(Calendar.HOUR_OF_DAY) < currentDate.get(Calendar.HOUR_OF_DAY)) {
+                    return false;
+                }
+                else if(taskDate.get(Calendar.HOUR_OF_DAY) == currentDate.get(Calendar.HOUR_OF_DAY)) {
+                    if(taskDate.get(Calendar.MINUTE) - currentDate.get(Calendar.MINUTE) <= 20) {
+                        return false;
+                    }
+                }
+            }
         }
 
         return true;

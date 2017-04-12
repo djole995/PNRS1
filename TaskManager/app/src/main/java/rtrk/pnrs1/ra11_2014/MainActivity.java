@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE = 1;
     public static final int REQUEST_CODE_MODIFY = 2;
     protected static CustomAdapter customAdapter;
-    protected ArrayList<ListItem> taskList;
     protected static ListView listView;
     protected int modifyTaskIndex;
 
@@ -47,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this.getApplicationContext());
-        //customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
-        //customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.LOW, "ccc", "aac", date, true, false));
 
         listView.setAdapter(customAdapter);
 
