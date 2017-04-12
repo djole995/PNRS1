@@ -155,8 +155,6 @@ public class Main2Activity extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*String date = txtDay.getText().toString()+"/"+txtMonth.getText().toString()+
-                        "/"+txtYear.getText().toString();*/
                 ListItem.TaskPriority priority;
                 int date[] = {day, month, year, hours, minutes};
 
@@ -173,8 +171,16 @@ public class Main2Activity extends AppCompatActivity {
 
 
                 Intent intent = getIntent();
-                intent.putExtra(getString(R.string.key_add_task), new ListItem(priority, txtTaskName.getText().toString(),
-                       txtTaskDescription.getText().toString(), date, chBoxReminder.isChecked(), false));
+
+                if(intent.getSerializableExtra(getString(R.string.key_modify_task)) != null) {
+                    ListItem listItem = (ListItem) intent.getSerializableExtra(getString(R.string.key_modify_task));
+                    listItem = new ListItem(priority, txtTaskName.getText().toString(),
+                            txtTaskDescription.getText().toString(), date, chBoxReminder.isChecked(), false);
+                }
+                else {
+                    intent.putExtra(getString(R.string.key_add_task), new ListItem(priority, txtTaskName.getText().toString(),
+                            txtTaskDescription.getText().toString(), date, chBoxReminder.isChecked(), false));
+                }
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -183,7 +189,9 @@ public class Main2Activity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(in);
+                Intent intent = getIntent();
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
 

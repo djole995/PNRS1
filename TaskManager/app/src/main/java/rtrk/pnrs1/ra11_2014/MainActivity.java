@@ -88,11 +88,13 @@ public class MainActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
 
             if (requestCode == REQUEST_CODE  && resultCode  == RESULT_OK) {
-                ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_add_task));
-                customAdapter.addTask(listItem);
+                if(data.getSerializableExtra(getString(R.string.key_add_task)) != null) {
+                    ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_add_task));
+                    customAdapter.addTask(listItem);
+                }
             }
             else if(requestCode == REQUEST_CODE_MODIFY  && resultCode  == RESULT_OK) {
-
+                customAdapter.notifyDataSetChanged();
             }
         } catch (Exception ex) {
             Toast.makeText(MainActivity.this, ex.toString(),
