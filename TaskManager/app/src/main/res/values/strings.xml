@@ -23,5 +23,7 @@
     <string name="key_modify_task">Modify Task</string>
     <string name="task_finished_check_box">Task finished</string>
     <string name="tomorrow">Tomorrow</string>
+    <string name="delete_task">Delete</string>
+    <string name="save_task">Save</string>
 
 </resources>

@@ -319,7 +319,8 @@ public class Main2Activity extends AppCompatActivity {
 
             chBoxReminder.setChecked(listItem.getTaskReminder());
 
-            btnAddTask.setText(R.string.confirm);
+            btnAddTask.setText(R.string.save_task);
+            btnCancel.setText(getString(R.string.delete_task));
         }
 
     }

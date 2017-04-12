@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorGray">
 
         <View
             android:id="@+id/item_task_priority"
@@ -67,12 +68,11 @@
 
             <CheckBox
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:text="@string/task_finished_check_box"
                 android:textColor="@color/colorBlack"
-                android:id="@+id/item_task_finished"
-                android:backgroundTint="@color/colorRed" />
+                android:id="@+id/item_task_finished" />
         </LinearLayout>
 
 
