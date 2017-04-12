@@ -82,14 +82,4 @@ public class ListItem implements Serializable {
     public void setTaskDescription(String taskDescription) {
         this.taskDescription = taskDescription;
     }
-
-   /* public int[] getTaskDateAsArray() {
-        String[] day = new String[3];
-        int[] ret = new int[3];
-        day = taskDate.split("/");
-
-        for(int i = 0; i < 3; i++) {
-
-        }
-    }*/
 }

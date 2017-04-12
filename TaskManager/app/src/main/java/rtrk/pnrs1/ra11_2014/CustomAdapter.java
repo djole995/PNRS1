@@ -2,6 +2,7 @@ package rtrk.pnrs1.ra11_2014;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.telecom.Call;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -71,7 +73,7 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ListItem listItem = (ListItem) getItem(position);
-        ViewHolder viewHolder;
+        final ViewHolder viewHolder;
 
 
         if (convertView == null) {
@@ -105,42 +107,29 @@ public class CustomAdapter extends BaseAdapter {
         }
 
         int date[] = listItem.getTaskDate();
-
-/*        String hours;
-        String minutes;
-        String day = Integer.toString(date[0]);
-        String month = Integer.toString(date[1]);
-        String year = Integer.toString(date[2]);
-
-        Calendar current = Calendar.getInstance();
-        Calendar taskCurrent = Calendar.getInstance();
-
-        setDate(
-
-        if(date[3] > 9) {
-            hours = Integer.toString(date[3]);
-        }
-        else {
-            hours = "0"+Integer.toString(date[3]);
-        }
-
-        if(date[4] > 9) {
-            minutes = Integer.toString(date[4]);
-        }
-        else {
-            minutes = "0"+Integer.toString(date[4]);
-        }
-
-
-
-
-        String strDate = Integer.toString(date[0])+"/"+Integer.toString(date[1])+"/"+Integer.toString(date[2])
-                +"\n"+/*Integer.toString(date[3])hours+":"+/*Integer.toString(date[4])minutes*/;
         String strDate = getFormatedDate(date);
 
         viewHolder.taskDate.setText(strDate);
-        viewHolder.taskReminder.setChecked(listItem.getTaskReminder());
+        if(listItem.getTaskReminder()) {
+            viewHolder.taskReminder.setVisibility(View.VISIBLE);
+            viewHolder.taskReminder.setChecked(listItem.getTaskReminder());
+        }
+        else {
+            viewHolder.taskReminder.setVisibility(View.INVISIBLE);
+        }
         viewHolder.taskFinished.setChecked(listItem.getTaskFinished());
+
+        viewHolder.taskFinished.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked) {
+                    viewHolder.taskName.setPaintFlags(viewHolder.taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                }
+                else {
+                    viewHolder.taskName.setPaintFlags(viewHolder.taskName.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
+                }
+            }
+        });
 
 
         return convertView;

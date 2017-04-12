@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.LauncherActivity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected static CustomAdapter customAdapter;
     protected static ListView listView;
     protected int modifyTaskIndex;
+    protected CheckBox chBoxTaskFinished;
 
 
     @Override
@@ -56,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnStat = (Button) findViewById(R.id.btnStat);
         final Intent inNewTask = new Intent(MainActivity.this, Main2Activity.class);
         final Intent inStat = new Intent(MainActivity.this, Main3Activity.class);
+        chBoxTaskFinished = (CheckBox) findViewById(R.id.item_task_finished);
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
