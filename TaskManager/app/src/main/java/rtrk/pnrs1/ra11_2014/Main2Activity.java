@@ -174,8 +174,9 @@ public class Main2Activity extends AppCompatActivity {
 
                 if(intent.getSerializableExtra(getString(R.string.key_modify_task)) != null) {
                     ListItem listItem = (ListItem) intent.getSerializableExtra(getString(R.string.key_modify_task));
-                    listItem = new ListItem(priority, txtTaskName.getText().toString(),
-                            txtTaskDescription.getText().toString(), date, chBoxReminder.isChecked(), false);
+
+                    intent.putExtra(getString(R.string.key_modify_task), new ListItem(priority, txtTaskName.getText().toString(),
+                            txtTaskDescription.getText().toString(), date, chBoxReminder.isChecked(), false));
                 }
                 else {
                     intent.putExtra(getString(R.string.key_add_task), new ListItem(priority, txtTaskName.getText().toString(),

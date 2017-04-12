@@ -37,6 +37,11 @@ public class CustomAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void modifyTask(ListItem listItem, int position) {
+        taskList.set(position, listItem);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return taskList.size();
@@ -97,8 +102,33 @@ public class CustomAdapter extends BaseAdapter {
         }
 
         int date[] = listItem.getTaskDate();
+
+        String hours;
+        String minutes;
+        String day = Integer.toString(date[0]);
+        String month = Integer.toString(date[1]);
+        String year = Integer.toString(date[2]);
+
+
+        if(date[3] > 9) {
+            hours = Integer.toString(date[3]);
+        }
+        else {
+            hours = "0"+Integer.toString(date[3]);
+        }
+
+        if(date[4] > 9) {
+            minutes = Integer.toString(date[4]);
+        }
+        else {
+            minutes = "0"+Integer.toString(date[4]);
+        }
+
+
+
+
         String strDate = Integer.toString(date[0])+"/"+Integer.toString(date[1])+"/"+Integer.toString(date[2])
-                +"\n"+Integer.toString(date[3])+":"+Integer.toString(date[4]);
+                +"\n"+/*Integer.toString(date[3])*/hours+":"+/*Integer.toString(date[4])*/minutes;
 
         viewHolder.taskDate.setText(strDate);
         viewHolder.taskReminder.setChecked(listItem.getTaskReminder());

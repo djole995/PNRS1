@@ -12,7 +12,6 @@
         android:id="@+id/itemLayout"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/custom_border"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true">
 
@@ -31,7 +30,7 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:textSize="20dp"
-            android:gravity="left|center"
+            android:gravity="center"
             android:textAlignment="gravity"
             android:textColor="@color/colorBlack" />
 
@@ -62,15 +61,18 @@
                     android:layout_height="match_parent"
                     android:textColor="@color/colorBlack"
                     android:gravity="center"
-                    android:textSize="20dp"
+                    android:textSize="15dp"
                     android:id="@+id/item_task_date"/>
              </LinearLayout>
 
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:id="@+id/item_task_finished"/>
+                android:layout_gravity="left"
+                android:text="@string/task_finished_check_box"
+                android:textColor="@color/colorBlack"
+                android:id="@+id/item_task_finished"
+                android:backgroundTint="@color/colorRed" />
         </LinearLayout>
 
 

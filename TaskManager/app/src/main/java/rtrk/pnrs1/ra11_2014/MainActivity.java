@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected static CustomAdapter customAdapter;
     protected ArrayList<ListItem> taskList;
     protected static ListView listView;
-
+    protected int modifyTaskIndex;
 
 
     @Override
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-               inNewTask.putExtra(getString(R.string.key_modify_task), (ListItem) parent.getItemAtPosition(position));
-
+                inNewTask.putExtra(getString(R.string.key_modify_task), (ListItem) parent.getItemAtPosition(position));
+                modifyTaskIndex = position;
                 startActivityForResult(inNewTask , REQUEST_CODE_MODIFY);
                 return true;
             }
@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             else if(requestCode == REQUEST_CODE_MODIFY  && resultCode  == RESULT_OK) {
-                customAdapter.notifyDataSetChanged();
+                ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_modify_task));
+                customAdapter.modifyTask(listItem, modifyTaskIndex);
             }
         } catch (Exception ex) {
             Toast.makeText(MainActivity.this, ex.toString(),
