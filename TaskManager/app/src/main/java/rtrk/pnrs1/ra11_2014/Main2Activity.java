@@ -190,6 +190,11 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = getIntent();
+
+                if(intent.getSerializableExtra(getString(R.string.key_modify_task)) != null) {
+                    intent.putExtra(getString(R.string.key_modify_task), (ListItem) null);
+                }
+
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -394,6 +399,11 @@ public class Main2Activity extends AppCompatActivity {
                 }
                 else if(taskDate.get(Calendar.HOUR_OF_DAY) == currentDate.get(Calendar.HOUR_OF_DAY)) {
                     if(taskDate.get(Calendar.MINUTE) - currentDate.get(Calendar.MINUTE) <= 20) {
+                        return false;
+                    }
+                }
+                else if(taskDate.get(Calendar.HOUR_OF_DAY) - currentDate.get(Calendar.HOUR_OF_DAY) == 1) {
+                    if(taskDate.get(Calendar.MINUTE) + (60 - currentDate.get(Calendar.MINUTE)) <= 20) {
                         return false;
                     }
                 }

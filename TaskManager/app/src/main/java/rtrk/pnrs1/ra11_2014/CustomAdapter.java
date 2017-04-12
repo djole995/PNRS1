@@ -47,6 +47,11 @@ public class CustomAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void deleteTask(ListItem listItem, int position) {
+        taskList.remove(position);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return taskList.size();

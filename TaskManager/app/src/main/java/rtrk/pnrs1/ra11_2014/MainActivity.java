@@ -102,7 +102,13 @@ public class MainActivity extends AppCompatActivity {
             }
             else if(requestCode == REQUEST_CODE_MODIFY  && resultCode  == RESULT_OK) {
                 ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_modify_task));
-                customAdapter.modifyTask(listItem, modifyTaskIndex);
+
+                if(listItem != null) {
+                    customAdapter.modifyTask(listItem, modifyTaskIndex);
+                }
+                else {
+                    customAdapter.deleteTask(listItem, modifyTaskIndex);
+                }
             }
         } catch (Exception ex) {
             Toast.makeText(MainActivity.this, ex.toString(),
