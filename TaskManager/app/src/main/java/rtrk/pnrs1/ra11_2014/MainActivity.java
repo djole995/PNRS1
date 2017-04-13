@@ -51,9 +51,15 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this.getApplicationContext());
+        /*customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.LOW, "ccc", "aac", date, true, false));
         customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
         customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
         customAdapter.addTask(new ListItem(ListItem.TaskPriority.LOW, "ccc", "aac", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
+        customAdapter.addTask(new ListItem(ListItem.TaskPriority.LOW, "ccc", "aac", date, true, false));*/
 
         listView.setAdapter(customAdapter);
 

@@ -146,7 +146,6 @@ public class CustomAdapter extends BaseAdapter {
         String month = Integer.toString(date[1]);
         String year = Integer.toString(date[2]);
 
-       // int daysInMonths[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
         String daysOfWeek[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
                 "Saturday"};
 
