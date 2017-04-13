@@ -91,7 +91,7 @@ public class CustomAdapter extends BaseAdapter {
             viewHolder.taskPriority = convertView.findViewById(R.id.item_task_priority);
             viewHolder.taskDate = (TextView) convertView.findViewById(R.id.item_task_date);
             viewHolder.taskFinished = (CheckBox) convertView.findViewById(R.id.item_task_finished);
-            viewHolder.taskReminder = (RadioButton) convertView.findViewById(R.id.item_task_reminder);
+            viewHolder.taskReminder = (ImageView) convertView.findViewById(R.id.item_task_reminder);
 
             convertView.setTag(viewHolder);
         } else {
@@ -117,7 +117,6 @@ public class CustomAdapter extends BaseAdapter {
         viewHolder.taskDate.setText(strDate);
         if(listItem.getTaskReminder()) {
             viewHolder.taskReminder.setVisibility(View.VISIBLE);
-            viewHolder.taskReminder.setChecked(listItem.getTaskReminder());
         }
         else {
             viewHolder.taskReminder.setVisibility(View.INVISIBLE);
@@ -213,6 +212,6 @@ public class CustomAdapter extends BaseAdapter {
         TextView taskDate;
         View taskPriority;
         CheckBox taskFinished;
-        RadioButton taskReminder;
+        ImageView taskReminder;
     }
 }
