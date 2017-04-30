@@ -25,5 +25,8 @@
     <string name="tomorrow">Tomorrow</string>
     <string name="delete_task">Delete</string>
     <string name="save_task">Save</string>
+    <string name="high_priority">High priority tasks</string>
+    <string name="medium_priority">Medium priority tasks</string>
+    <string name="low_priority">Low priority tasks</string>
 
 </resources>
