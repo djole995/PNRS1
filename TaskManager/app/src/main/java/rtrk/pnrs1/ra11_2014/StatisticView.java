@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.text.Layout;
@@ -38,6 +39,9 @@ public class StatisticView extends View {
         highPBound = new RectF();
         mediumPBound = new RectF();
         lowPBound = new RectF();
+
+        String params[] = new String[3];
+        new AnimationThread().execute(params);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -47,10 +51,6 @@ public class StatisticView extends View {
 
         int width = canvas.getWidth();
         int height = canvas.getHeight();
-        float highPDegree = ((float)highPFinished/100)*360;
-        float mediumPDegree = ((float)mediumPFinished/100)*360;
-        float lowPDegree = ((float)lowPFinished/100)*360;
-        boolean animFinished = true;
 
         highPBound.set(width/2-pieChartSize/2, height/2-pieChartSize-100 ,width/2+pieChartSize/2, height/2-100);
         mediumPBound.set(width/2-pieChartSize-25, height/2 ,width/2-25, height/2+pieChartSize);
@@ -93,24 +93,54 @@ public class StatisticView extends View {
         paint.setTextSize(40.0f);
         canvas.drawText(Integer.toString((int)(((float)animLowPCnt/360)*100)) + "%",
                 lowPBound.centerX() - 30, lowPBound.centerY() + 10, paint);
+    }
 
-        if(animHighPCnt < highPDegree) {
-            animHighPCnt += 2;
-            animFinished = false;
-        }
+    private class AnimationThread extends AsyncTask<String, Void, String> {
 
-        if(animMediumPCnt < mediumPDegree) {
-            animMediumPCnt += 2;
-            animFinished = false;
-        }
+        @Override
+        protected String doInBackground(String... params) {
+            boolean animFinished = false;
+            float highPDegree = ((float)highPFinished/100)*360;
+            float mediumPDegree = ((float)mediumPFinished/100)*360;
+            float lowPDegree = ((float)lowPFinished/100)*360;
 
-        if(animLowPCnt < lowPDegree) {
-            animLowPCnt += 2;
-            animFinished = false;
-        }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-        if(!animFinished) {
-            invalidate();
+            while(animFinished != true) {
+
+                animFinished = true;
+
+                if(animHighPCnt < highPDegree) {
+                    animHighPCnt += 1;
+                    animFinished = false;
+                }
+
+                if(animMediumPCnt < mediumPDegree) {
+                    animMediumPCnt += 1;
+                    animFinished = false;
+                }
+
+                if(animLowPCnt < lowPDegree) {
+                    animLowPCnt += 1;
+                    animFinished = false;
+                }
+
+                if(!animFinished) {
+                    postInvalidate();
+
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            return (String)null;
         }
     }
 }
