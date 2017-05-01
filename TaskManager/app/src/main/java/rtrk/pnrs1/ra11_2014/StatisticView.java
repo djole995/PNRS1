@@ -9,7 +9,10 @@ import android.graphics.RectF;
 import android.graphics.Region;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.text.Layout;
+import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * Created by Milan on 30.4.2017.
@@ -27,11 +30,10 @@ public class StatisticView extends View {
     protected int animHighPCnt = 1;
     protected int animMediumPCnt = 1;
     protected int animLowPCnt = 1;
-
     protected int pieChartSize = 180;
 
-    public StatisticView(Context context) {
-        super(context);
+    public StatisticView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         paint = new Paint();
         highPBound = new RectF();
         mediumPBound = new RectF();
@@ -47,7 +49,7 @@ public class StatisticView extends View {
         int height = canvas.getHeight();
         float highPDegree = ((float)highPFinished/100)*360;
         float mediumPDegree = ((float)mediumPFinished/100)*360;
-        float lowPDegree = ((float)lowPFinished/100)*360;;
+        float lowPDegree = ((float)lowPFinished/100)*360;
         boolean animFinished = true;
 
         highPBound.set(width/2-pieChartSize/2, height/2-pieChartSize-100 ,width/2+pieChartSize/2, height/2-100);
