@@ -1,18 +1,23 @@
 package rtrk.pnrs1.ra11_2014;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
+import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.text.Layout;
 import android.util.AttributeSet;
+import android.view.Surface;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 /**
@@ -31,7 +36,7 @@ public class StatisticView extends View {
     protected int animHighPCnt = 1;
     protected int animMediumPCnt = 1;
     protected int animLowPCnt = 1;
-    protected int pieChartSize = 180;
+    protected float pieChartSize;
 
     public StatisticView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -39,6 +44,27 @@ public class StatisticView extends View {
         highPBound = new RectF();
         mediumPBound = new RectF();
         lowPBound = new RectF();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        int width = wm.getDefaultDisplay().getWidth();
+
+        /* Landscape */
+        if(wm.getDefaultDisplay().getOrientation() == Surface.ROTATION_90
+                || wm.getDefaultDisplay().getOrientation() == Surface.ROTATION_270) {
+            pieChartSize = width/4.5f;
+
+            highPBound.set(width/2-pieChartSize/2, height/2-pieChartSize ,width/2+pieChartSize/2, height/2);
+            mediumPBound.set(width/2-3*pieChartSize/2-50, height/2-pieChartSize, width/2-pieChartSize/2-50, height/2);
+            lowPBound.set(width/2+pieChartSize/2+50, height/2-pieChartSize, width/2+3*pieChartSize/2+50, height/2);
+        }
+        /* Portrait */
+        else {
+            pieChartSize = height/4.5f;
+
+            highPBound.set(width/2-pieChartSize/2, height/2-pieChartSize-100 ,width/2+pieChartSize/2, height/2-100);
+            mediumPBound.set(width/2-pieChartSize-25, height/2 ,width/2-25, height/2+pieChartSize);
+            lowPBound.set(width/2+25, height/2 ,width/2+25+pieChartSize, height/2+pieChartSize);
+        }
 
         String params[] = new String[3];
         new AnimationThread().execute(params);
@@ -48,13 +74,6 @@ public class StatisticView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        int width = canvas.getWidth();
-        int height = canvas.getHeight();
-
-        highPBound.set(width/2-pieChartSize/2, height/2-pieChartSize-100 ,width/2+pieChartSize/2, height/2-100);
-        mediumPBound.set(width/2-pieChartSize-25, height/2 ,width/2-25, height/2+pieChartSize);
-        lowPBound.set(width/2+25, height/2 ,width/2+25+pieChartSize, height/2+pieChartSize);
 
         /* Drawing High priority tasks chart */
         paint.setTextSize(25.0f);
