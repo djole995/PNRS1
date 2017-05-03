@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
@@ -45,12 +46,14 @@ public class StatisticView extends View {
         mediumPBound = new RectF();
         lowPBound = new RectF();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        int height = wm.getDefaultDisplay().getHeight();
-        int width = wm.getDefaultDisplay().getWidth();
+        Point screenSize = new Point();
+        wm.getDefaultDisplay().getSize(screenSize);
+        int height = screenSize.y;
+        int width = screenSize.x;
 
         /* Landscape */
-        if(wm.getDefaultDisplay().getOrientation() == Surface.ROTATION_90
-                || wm.getDefaultDisplay().getOrientation() == Surface.ROTATION_270) {
+        if(wm.getDefaultDisplay().getRotation() == Surface.ROTATION_90
+                || wm.getDefaultDisplay().getRotation() == Surface.ROTATION_270) {
             pieChartSize = width/4.5f;
 
             highPBound.set(width/2-pieChartSize/2, height/2-pieChartSize ,width/2+pieChartSize/2, height/2);
@@ -76,21 +79,21 @@ public class StatisticView extends View {
         super.onDraw(canvas);
 
         /* Drawing High priority tasks chart */
-        paint.setTextSize(25.0f);
-        canvas.drawText(getContext().getText(R.string.high_priority).toString(), highPBound.left, highPBound.bottom+20, paint);
+        paint.setTextSize(45.0f);
+        canvas.drawText(getContext().getText(R.string.high_priority).toString(), highPBound.left, highPBound.bottom+40, paint);
         paint.setARGB(255, 255, 100, 100);
         canvas.drawArc(highPBound, 270, animHighPCnt, true, paint);
         paint.setARGB(255, 0, 200, 255);
         canvas.drawArc(highPBound, animHighPCnt - 90, 360 - animHighPCnt, true, paint);
         paint.setColor(Color.BLACK);
-        paint.setTextSize(40.0f);
+        paint.setTextSize(45.0f);
         canvas.drawText(Integer.toString((int)(((float)animHighPCnt/360)*100)) + "%",
                 highPBound.centerX() - 30, highPBound.centerY() + 10, paint);
 
         /* Drawing Medium priority tasks chart */
-        paint.setTextSize(25.0f);
+        paint.setTextSize(45.0f);
         canvas.drawText(getContext().getText(R.string.medium_priority).toString(),
-                mediumPBound.left-30, mediumPBound.bottom+20, paint);
+                mediumPBound.left-30, mediumPBound.bottom+40, paint);
         paint.setARGB(255, 0, 255, 0);
         canvas.drawArc(mediumPBound, 270, animMediumPCnt, true, paint);
         paint.setARGB(255, 0, 200, 255);
@@ -101,9 +104,9 @@ public class StatisticView extends View {
                 mediumPBound.centerX() - 30, mediumPBound.centerY() + 10, paint);
 
         /* Drawing Low priority tasks chart */
-        paint.setTextSize(25.0f);
+        paint.setTextSize(45.0f);
         canvas.drawText(getContext().getText(R.string.low_priority).toString(),
-                lowPBound.left, lowPBound.bottom+20, paint);
+                lowPBound.left, lowPBound.bottom+40, paint);
         paint.setARGB(255, 255, 255, 0);
         canvas.drawArc(lowPBound, 270, animLowPCnt, true, paint);
         paint.setARGB(255, 0, 200, 255);
