@@ -85,7 +85,7 @@ public class StatisticView extends View {
 
         /* Drawing High priority tasks chart */
         paint.setTextSize(textSize);
-        canvas.drawText(getContext().getText(R.string.high_priority).toString(), highPBound.left, highPBound.bottom+40, paint);
+        canvas.drawText(getContext().getText(R.string.high_priority).toString(), highPBound.left, highPBound.bottom+textSize, paint);
         paint.setARGB(255, 255, 100, 100);
         canvas.drawArc(highPBound, 270, animHighPCnt, true, paint);
         paint.setARGB(255, 0, 200, 255);
@@ -98,20 +98,20 @@ public class StatisticView extends View {
         /* Drawing Medium priority tasks chart */
         paint.setTextSize(textSize);
         canvas.drawText(getContext().getText(R.string.medium_priority).toString(),
-                mediumPBound.left-30, mediumPBound.bottom+40, paint);
+                mediumPBound.left-30, mediumPBound.bottom+textSize, paint);
         paint.setARGB(255, 0, 255, 0);
         canvas.drawArc(mediumPBound, 270, animMediumPCnt, true, paint);
         paint.setARGB(255, 0, 200, 255);
         canvas.drawArc(mediumPBound, animMediumPCnt - 90, 360 - animMediumPCnt, true, paint);
         paint.setColor(Color.BLACK);
-        paint.setTextSize(textSize);
+        paint.setTextSize(40.0f);
         canvas.drawText(Integer.toString((int)(((float)animMediumPCnt/360)*100)) + "%",
                 mediumPBound.centerX() - 30, mediumPBound.centerY() + 10, paint);
 
         /* Drawing Low priority tasks chart */
         paint.setTextSize(textSize);
         canvas.drawText(getContext().getText(R.string.low_priority).toString(),
-                lowPBound.left, lowPBound.bottom+40, paint);
+                lowPBound.left, lowPBound.bottom+textSize, paint);
         paint.setARGB(255, 255, 255, 0);
         canvas.drawArc(lowPBound, 270, animLowPCnt, true, paint);
         paint.setARGB(255, 0, 200, 255);
