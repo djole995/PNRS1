@@ -2,10 +2,17 @@ package rtrk.pnrs1.ra11_2014;
 
 import android.app.Activity;
 import android.app.LauncherActivity;
+import android.app.NotificationManager;
 import android.content.ClipData;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Paint;
 import android.net.Uri;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +47,36 @@ public class MainActivity extends AppCompatActivity {
     protected static ListView listView;
     protected int modifyTaskIndex;
     protected CheckBox chBoxTaskFinished;
+    protected Intent serviceIntent;
 
+    private IMyBinder iMyBinder = new IMyBinder() {
+
+        @Override
+        public IBinder asBinder() {
+            return null;
+        }
+
+        @Override
+        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+
+        }
+
+        @Override
+        public void addTaskNotify(String taskName) throws RemoteException {
+
+        }
+
+        @Override
+        public void modifyTaskNotify(String taskName) throws RemoteException {
+
+        }
+
+        @Override
+        public void deleteTaskNotify(String taskName) throws RemoteException {
+
+        }
+    };
+    protected ServiceConnection serviceConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (ListView) findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this.getApplicationContext());
-        /*customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.LOW, "ccc", "aac", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.LOW, "ccc", "aac", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.HIGH, "aaa", "aab", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.MEDIUM, "BBB", "aab", date, true, false));
-        customAdapter.addTask(new ListItem(ListItem.TaskPriority.LOW, "ccc", "aac", date, true, false));*/
 
         listView.setAdapter(customAdapter);
 
@@ -92,6 +119,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(inStat);
             }
         });
+
+        serviceIntent = new Intent(MainActivity.this, MyService.class);
+
+        serviceConnection = new ServiceConnection() {
+
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                iMyBinder = IMyBinder.Stub.asInterface(service);
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+
+            }
+        };
+
+        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
 
@@ -104,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 if(data.getSerializableExtra(getString(R.string.key_add_task)) != null) {
                     ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_add_task));
                     customAdapter.addTask(listItem);
+                    iMyBinder.addTaskNotify(listItem.getTaskName());
                 }
             }
             else if(requestCode == REQUEST_CODE_MODIFY  && resultCode  == RESULT_OK) {
@@ -111,9 +156,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if(listItem != null) {
                     customAdapter.modifyTask(listItem, modifyTaskIndex);
+                    iMyBinder.modifyTaskNotify(listItem.getTaskName());
                 }
                 else {
+                    iMyBinder.deleteTaskNotify(customAdapter.taskList.get(modifyTaskIndex).getTaskName());
                     customAdapter.deleteTask(listItem, modifyTaskIndex);
+
                 }
             }
         } catch (Exception ex) {
@@ -121,5 +169,13 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void onDestroy() {
+        super.onDestroy();
+
+        unbindService(serviceConnection);
+    }
+
+
 
 }

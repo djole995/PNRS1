@@ -28,7 +28,8 @@ import java.util.Date;
 public class CustomAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<ListItem> taskList;
+
+    public ArrayList<ListItem> taskList;
 
 
     public CustomAdapter(Context context) {
