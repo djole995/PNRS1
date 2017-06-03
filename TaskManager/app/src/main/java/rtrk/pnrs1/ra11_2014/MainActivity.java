@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
     protected int modifyTaskIndex;
     protected CheckBox chBoxTaskFinished;
     protected Intent serviceIntent;
-    protected TaskDBHelper taskDBHelper;
 
     private IMyBinder iMyBinder = new IMyBinder() {
 
@@ -86,16 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
         int date[] = {1, 2, 2018, 22, 30};
 
-        taskDBHelper = new TaskDBHelper(getApplicationContext());
-        ListItem[] tasks = taskDBHelper.readTasks();
-
         listView = (ListView) findViewById(R.id.listView);
         customAdapter = new CustomAdapter(this.getApplicationContext());
 
         listView.setAdapter(customAdapter);
-
-        for(int i = 0; i < tasks.length; i++)
-            customAdapter.addTask(tasks[i]);
 
         Button btnNewTask = (Button) findViewById(R.id.btnNewTask);
         Button btnStat = (Button) findViewById(R.id.btnStat);
@@ -155,8 +148,7 @@ public class MainActivity extends AppCompatActivity {
                 if(data.getSerializableExtra(getString(R.string.key_add_task)) != null) {
                     ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_add_task));
                     customAdapter.addTask(listItem);
-                    taskDBHelper.insertTask(listItem);
-                    ListItem[] l = taskDBHelper.readTasks();
+                    MyService.addTask(listItem);
                     iMyBinder.addTaskNotify(listItem.getTaskName());
                 }
             }
@@ -164,12 +156,14 @@ public class MainActivity extends AppCompatActivity {
                 ListItem listItem = (ListItem) data.getSerializableExtra(getString(R.string.key_modify_task));
 
                 if(listItem != null) {
+                    ListItem oldListItem = (ListItem) customAdapter.getItem(modifyTaskIndex);
                     customAdapter.modifyTask(listItem, modifyTaskIndex);
+                    MyService.modifyTask(listItem, oldListItem.getTaskName());
                     iMyBinder.modifyTaskNotify(listItem.getTaskName());
+
                 }
                 else {
-                    taskDBHelper.deleteTask(customAdapter.taskList.get(modifyTaskIndex).getTaskName());
-                    ListItem[] l = taskDBHelper.readTasks();
+                    MyService.deleteTask(customAdapter.taskList.get(modifyTaskIndex).getTaskName());
                     iMyBinder.deleteTaskNotify(customAdapter.taskList.get(modifyTaskIndex).getTaskName());
                     customAdapter.deleteTask(listItem, modifyTaskIndex);
                 }

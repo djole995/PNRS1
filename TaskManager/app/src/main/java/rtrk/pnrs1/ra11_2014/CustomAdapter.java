@@ -78,7 +78,7 @@ public class CustomAdapter extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ListItem listItem = (ListItem) getItem(position);
+        final ListItem listItem = (ListItem) getItem(position);
         final ViewHolder viewHolder;
 
 
@@ -122,15 +122,21 @@ public class CustomAdapter extends BaseAdapter {
         else {
             viewHolder.taskReminder.setVisibility(View.INVISIBLE);
         }
+
         viewHolder.taskFinished.setChecked(listItem.getTaskFinished());
+
+        if(listItem.getTaskFinished())
+            viewHolder.taskName.setPaintFlags(viewHolder.taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
         viewHolder.taskFinished.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked) {
+                    notifyTaskState(viewHolder.taskName.getText().toString(), true);
                     viewHolder.taskName.setPaintFlags(viewHolder.taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
                 }
                 else {
+                    notifyTaskState(viewHolder.taskName.getText().toString(), false);
                     viewHolder.taskName.setPaintFlags(viewHolder.taskName.getPaintFlags() & ~(Paint.STRIKE_THRU_TEXT_FLAG));
                 }
             }
@@ -138,6 +144,15 @@ public class CustomAdapter extends BaseAdapter {
 
 
         return convertView;
+    }
+
+    public void notifyTaskState(String taskName, boolean isFinished) {
+        for(int i = 0; i < taskList.size(); i++)
+            if(taskList.get(i).getTaskName() == taskName) {
+                taskList.get(i).setTaskFinished(isFinished);
+                MyService.modifyTask(taskList.get(i), taskList.get(i).getTaskName());
+                break;
+            }
     }
 
     String getFormatedDate(int date[]) {

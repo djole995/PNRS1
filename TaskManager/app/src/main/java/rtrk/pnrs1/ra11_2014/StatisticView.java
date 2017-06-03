@@ -31,9 +31,9 @@ public class StatisticView extends View {
     protected RectF mediumPBound;
     protected RectF lowPBound;
 
-    protected int highPFinished = 68;
-    protected int mediumPFinished = 90;
-    protected int lowPFinished = 30;
+    protected float highPFinished = 0;
+    protected float mediumPFinished = 0;
+    protected float lowPFinished = 0;
     protected int animHighPCnt = 1;
     protected int animMediumPCnt = 1;
     protected int animLowPCnt = 1;
@@ -73,6 +73,33 @@ public class StatisticView extends View {
 
             textSize = height/40;
         }
+
+        int highPNum = 0;
+        int mediumPNum = 0;
+        int lowPNum = 0;
+
+        for(int i = 0; i < MainActivity.customAdapter.taskList.size(); i++) {
+            if(MainActivity.customAdapter.taskList.get(i).getTaskPriority() == ListItem.TaskPriority.HIGH) {
+                highPNum++;
+                if(MainActivity.customAdapter.taskList.get(i).getTaskFinished())
+                    highPFinished++;
+            }
+            else if(MainActivity.customAdapter.taskList.get(i).getTaskPriority() == ListItem.TaskPriority.MEDIUM) {
+                mediumPNum++;
+                if(MainActivity.customAdapter.taskList.get(i).getTaskFinished())
+                    mediumPFinished++;
+            }
+            else {
+                lowPNum++;
+                if(MainActivity.customAdapter.taskList.get(i).getTaskFinished())
+                    lowPFinished++;
+            }
+        }
+
+        highPFinished = (highPFinished == 0) ? 0 : highPFinished/highPNum*100;
+        mediumPFinished = (mediumPFinished == 0) ? 0 : mediumPFinished/mediumPNum*100;
+        lowPFinished = (lowPFinished == 0) ? 0 : lowPFinished/lowPNum*100;
+
 
         String params[] = new String[3];
         new AnimationThread().execute(params);

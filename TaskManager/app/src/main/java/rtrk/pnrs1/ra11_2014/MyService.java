@@ -20,9 +20,11 @@ public class MyService extends Service {
 
     protected NotificationThread notificationThread;
     protected NotificationCompat.Builder builder;
+    protected static TaskDBHelper taskDBHelper;
 
     protected NotificationManager notificationManager;
     protected MyBinder myBinder;
+
 
     public MyService() {
     }
@@ -43,11 +45,34 @@ public class MyService extends Service {
         builder = new NotificationCompat.Builder(this).setSmallIcon(R.mipmap.ic_launcher);
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        taskDBHelper = new TaskDBHelper(getApplicationContext());
+
+        ListItem[] tasks = taskDBHelper.readTasks();
+
+        for(int i = 0; i < tasks.length; i++)
+            MainActivity.customAdapter.addTask(tasks[i]);
+
         notificationThread = new NotificationThread();
         notificationThread.start();
         myBinder = new MyBinder(notificationManager, builder);
 
 
+    }
+
+    public static void addTask(ListItem listItem) {
+        taskDBHelper.insertTask(listItem);
+    }
+
+    public static void modifyTask(ListItem listItem, String taskName) {
+        taskDBHelper.updateTask(listItem, taskName);
+    }
+
+    public static void deleteTask(String taskName) {
+        taskDBHelper.deleteTask(taskName);
+    }
+
+    public static ListItem[] readTasks() {
+        return taskDBHelper.readTasks();
     }
 
     @Override

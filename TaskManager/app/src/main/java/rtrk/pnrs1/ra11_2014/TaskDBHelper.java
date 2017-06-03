@@ -115,4 +115,31 @@ public class TaskDBHelper extends SQLiteOpenHelper {
         db.delete(databaseName, "TaskName"+"=?", new String[] {taskName});
         close();
     }
+
+    public void updateTask(ListItem task, String taskName) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("TaskName", task.getTaskName());
+        int[] taskDate = task.getTaskDate();
+        values.put("TaskDay", taskDate[0]);
+        values.put("TaskMonth", taskDate[1]);
+        values.put("TaskYear", taskDate[2]);
+        values.put("TaskHour", taskDate[3]);
+        values.put("TaskMinute", taskDate[4]);
+        values.put("TaskFinished", (task.getTaskFinished() == true) ? 1 : 0 );
+        values.put("TaskReminder", (task.getTaskReminder() == true) ? 1 : 0);
+        values.put("TaskDesc", task.getTaskDescription());
+
+        if(task.getTaskPriority() == ListItem.TaskPriority.LOW)
+            values.put("TaskPriority", 0);
+        else if(task.getTaskPriority() == ListItem.TaskPriority.MEDIUM)
+            values.put("TaskPriority", 1);
+        else
+            values.put("TaskPriority", 2);
+
+        db.update(databaseName, values, "TaskName"+"=?", new String[] {taskName});
+
+        db.close();
+    }
 }

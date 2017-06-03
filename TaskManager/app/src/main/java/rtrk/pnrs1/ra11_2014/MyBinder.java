@@ -15,6 +15,7 @@ public class MyBinder extends IMyBinder.Stub {
 
     protected NotificationManager notificationManager;
     protected NotificationCompat.Builder builder;
+    protected TaskDBHelper taskDBHelper;
 
     public MyBinder(NotificationManager notificationManager, NotificationCompat.Builder builder) {
         this.notificationManager = notificationManager;
@@ -32,15 +33,27 @@ public class MyBinder extends IMyBinder.Stub {
         notificationManager.notify(-3, builder.build());
     }
 
+    public void addTask(ListItem listItem) {
+        taskDBHelper.insertTask(listItem);
+    }
+
     @Override
     public void modifyTaskNotify(String taskName) throws RemoteException {
         builder.setContentTitle("Task Manager").setContentText("Task "+taskName+" modified.");
         notificationManager.notify(-2, builder.build());
     }
 
+    public void modifyTask(ListItem listItem, String taskName) {
+        taskDBHelper.updateTask(listItem, taskName);
+    }
+
     @Override
     public void deleteTaskNotify(String taskName) throws RemoteException {
         builder.setContentTitle("Task Manager").setContentText("Task "+taskName+" deleted.");
         notificationManager.notify(-1, builder.build());
+    }
+
+    public void deleteTask(String taskName) {
+        taskDBHelper.deleteTask(taskName);
     }
 }
