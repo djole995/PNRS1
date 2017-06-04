@@ -15,15 +15,5 @@ public class Main3Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-
-        inReturn = new Intent(Main3Activity.this, MainActivity.class);
-        btnReturn = (Button) findViewById(R.id.btn_return);
-
-        btnReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(inReturn);
-            }
-        });
     }
 }
