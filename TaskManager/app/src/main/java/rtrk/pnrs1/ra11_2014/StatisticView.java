@@ -40,6 +40,8 @@ public class StatisticView extends View {
     protected float pieChartSize;
     protected float textSize;
 
+    Stat stat;
+
     public StatisticView(Context context, AttributeSet attrs) {
         super(context, attrs);
         paint = new Paint();
@@ -51,6 +53,7 @@ public class StatisticView extends View {
         wm.getDefaultDisplay().getSize(screenSize);
         int height = screenSize.y;
         int width = screenSize.x;
+        stat = new Stat();
 
         /* Landscape */
         if(wm.getDefaultDisplay().getRotation() == Surface.ROTATION_90
@@ -96,9 +99,12 @@ public class StatisticView extends View {
             }
         }
 
-        highPFinished = (highPFinished == 0) ? 0 : highPFinished/highPNum*100;
+        highPFinished = stat.count(highPNum, (int)highPFinished);
+        mediumPFinished = stat.count(mediumPNum, (int)mediumPFinished);
+        mediumPFinished = stat.count(lowPNum, (int)lowPFinished);
+        /*highPFinished = (highPFinished == 0) ? 0 : highPFinished/highPNum*100;
         mediumPFinished = (mediumPFinished == 0) ? 0 : mediumPFinished/mediumPNum*100;
-        lowPFinished = (lowPFinished == 0) ? 0 : lowPFinished/lowPNum*100;
+        lowPFinished = (lowPFinished == 0) ? 0 : lowPFinished/lowPNum*100;*/
 
 
         String params[] = new String[3];
