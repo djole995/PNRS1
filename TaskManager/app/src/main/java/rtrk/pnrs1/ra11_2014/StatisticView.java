@@ -99,9 +99,9 @@ public class StatisticView extends View {
             }
         }
 
-        highPFinished = stat.count(highPNum, (int)highPFinished);
-        mediumPFinished = stat.count(mediumPNum, (int)mediumPFinished);
-        mediumPFinished = stat.count(lowPNum, (int)lowPFinished);
+        highPFinished = stat.count(highPNum, highPFinished);
+        mediumPFinished = stat.count(mediumPNum, mediumPFinished);
+        lowPFinished = stat.count(lowPNum, lowPFinished);
         /*highPFinished = (highPFinished == 0) ? 0 : highPFinished/highPNum*100;
         mediumPFinished = (mediumPFinished == 0) ? 0 : mediumPFinished/mediumPNum*100;
         lowPFinished = (lowPFinished == 0) ? 0 : lowPFinished/lowPNum*100;*/

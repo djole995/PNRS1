@@ -13,7 +13,7 @@ extern "C" {
  * Signature: (II)F
  */
 JNIEXPORT jfloat JNICALL Java_rtrk_pnrs1_ra11_12014_Stat_count
-  (JNIEnv *, jobject, jint, jint);
+  (JNIEnv *, jobject, jint, jfloat);
 
 #ifdef __cplusplus
 }

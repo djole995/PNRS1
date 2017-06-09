@@ -6,7 +6,7 @@ package rtrk.pnrs1.ra11_2014;
 
 public class Stat {
 
-    public native float count(int taskNum, int taskFinished);
+    public native float count(int taskNum, float taskFinished);
 
     static {
         System.loadLibrary("StatisticsLib");
